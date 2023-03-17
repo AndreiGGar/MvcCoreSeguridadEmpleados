@@ -1,0 +1,47 @@
+﻿@model List<Empleado>
+
+<h4>Vista Empleados</h4>
+
+@{
+    int dept = (int)ViewData["DEPTNO"];
+}
+
+<form method="post">
+    <input type="hidden" value="@dept" />
+    <label>Salario: </label>
+    <input type="text" name="salario" />
+    <button class="btn btn-dark">
+        Enviar
+    </button>
+</form>
+
+@if (Model != null)
+{
+    <table class="table table-active table-hover w-100 table-bordered text-center">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Apellido</th>
+                <th>Oficio</th>
+                <th>Salario</th>
+                <th>Departamento</th>
+                <th>Detalles</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Empleado emp in Model)
+            {
+                <tr>
+                    <td>@emp.IdEmpleado</td>
+                    <td>@emp.Apellido</td>
+                    <td>@emp.Oficio</td>
+                    <td>@emp.Salario</td>
+                    <td>@emp.Dept_no</td>
+                    <td>
+                        <a asp-controller="Empleados" asp-action="Details" asp-route-id="@emp.IdEmpleado" class="btn btn-info">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
